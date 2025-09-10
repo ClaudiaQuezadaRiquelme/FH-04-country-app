@@ -1,1 +1,6 @@
-<p>by-capital-page works!</p>
+<country-search-input
+  [placeholderSearch]="'Buscar por capital de mi país'"
+  (search)="search.set($event)"
+/>
+
+<country-list />
