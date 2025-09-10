@@ -22,18 +22,15 @@ export const countryRoutes: Routes = [
         component: ByRegionPageComponent,
       },
       {
+        path: 'by/:query',
+        loadComponent: () => import('./pages/country-page/country-page.component')
+      },
+      {
         path: '**',
         redirectTo: 'by-capital'
       }
     ]
   },
-  // {
-  //   path: 'country',
-  // },
-  // {
-  //   path: '**',
-  //   redirectTo: ''
-  // }
 ];
 
 export default countryRoutes;
