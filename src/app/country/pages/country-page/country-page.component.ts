@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { map } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-country-page',
@@ -9,9 +9,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './country-page.component.html',
 })
 export default class CountryPageComponent {
-  query = toSignal(
-    inject(ActivatedRoute).params.pipe(
-      map( params => params['query'])
-    )
-  );
+  countryService = inject(CountryService);
+  countryCode = inject(ActivatedRoute).snapshot.params['query'];
+
+  countryResource = rxResource({
+    request: () => ({ code: this.countryCode }),
+    loader: ({ request }) => {
+      return this.countryService.searchCountryByAlphaCode(request.code);
+    },
+  });
 }

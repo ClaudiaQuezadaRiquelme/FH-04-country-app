@@ -42,4 +42,20 @@ export class CountryService {
       )
     ;
   }
+
+  searchCountryByAlphaCode(code: string): Observable<Country | undefined> {
+    const query = code.toLocaleLowerCase();
+    const url = `${API_URL}/alpha/${query}`;
+
+    return this.http.get<RESTCountry[]>(url)
+      .pipe(
+        map( res => CountryMapper.mapRESTCountryArrayToCountryArray(res) ),
+        map( countries => countries.at(0) ),
+        catchError( err => {
+          console.log('Error fetching: ', err);
+          return throwError( ()=> new Error(`No se pudo obtener un país con el código ${code}`));
+        }),
+      )
+    ;
+  }
 }
