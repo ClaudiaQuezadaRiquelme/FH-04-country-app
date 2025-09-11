@@ -8,7 +8,7 @@ export class CountryMapper { // recibir un RESTCountry y devolver Country
       cca2: country.cca2,
       flag: country.flag,
       flagSvg: country.flags.svg,
-      name: country.name.common,
+      name: country.translations['spa'].common ?? 'No Spanish Name',
       capital: country.capital.join(','),
       population: country.population,
     }
