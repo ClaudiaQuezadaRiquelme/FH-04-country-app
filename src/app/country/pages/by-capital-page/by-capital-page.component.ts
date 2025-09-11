@@ -2,7 +2,6 @@ import { Component, inject, resource, signal } from '@angular/core';
 import { CountrySearchInputComponent } from '../../components/search-input/search-input.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 import { CountryService } from '../../services/country.service';
-import { Country } from '../../interfaces/country.interface';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -15,7 +14,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ByCapitalPageComponent {
   countryService = inject(CountryService);
-  query = signal('');
+  query = signal<string>('');
 
   countryResource = resource({
     request: () => ({ query: this.query() }),

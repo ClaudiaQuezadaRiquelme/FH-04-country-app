@@ -9,7 +9,7 @@ export class CountryMapper { // recibir un RESTCountry y devolver Country
       flag: country.flag,
       flagSvg: country.flags.svg,
       name: country.translations['spa'].common ?? 'No Spanish Name',
-      capital: country.capital.join(','),
+      capital: country.capital?.join(',') ?? 'No capital info',
       population: country.population,
     }
   }
