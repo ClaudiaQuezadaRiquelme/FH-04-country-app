@@ -3,4 +3,8 @@
   (search)="onSearch($event)"
 />
 
-<country-list [countries]="countries()" />
+@if (isError()) {
+  <span>{{isError()}}</span>
+} @else {
+  <country-list [countries]="countries()" />
+}

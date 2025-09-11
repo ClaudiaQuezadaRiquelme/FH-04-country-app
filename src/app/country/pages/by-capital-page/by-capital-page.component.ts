@@ -26,11 +26,24 @@ export class ByCapitalPageComponent {
     this.isError.set(null);
 
     this.countryService.searchByCapital(query)
-    .subscribe(res => {
-      this.isLoading.set(false);
-      this.countries.set(res);
-      console.log(res);
-    });
+    .subscribe({
+      next: (res) => {
+        this.isLoading.set(false);
+        this.countries.set(res);
+        console.log(res);
+      },
+      error: (err) => {
+        this.isLoading.set(false);
+        this.countries.set([]);
+        this.isError.set(`No se encontró un país con esa capital (${query}).`);
+      },
+    })
+
+    // .subscribe(res => {
+    //   this.isLoading.set(false);
+    //   this.countries.set(res);
+    //   console.log(res);
+    // });
 
 
   }
