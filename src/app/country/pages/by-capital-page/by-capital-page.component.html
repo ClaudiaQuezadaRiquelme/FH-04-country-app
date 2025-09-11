@@ -1,5 +1,18 @@
 <country-search-input
   [placeholderSearch]="'Buscar por capital'"
+  (search)="query.set($event)"
+/>
+
+@if ( countryResource.error()) {
+  <span>{{countryResource.error()}}</span>
+} @else {
+  <country-list [countries]="countryResource.value() || []" />
+}
+
+
+<!-- NO ES NECESARIO SI SE UTILIZA "Async reactivity with resources" -->
+<!-- <country-search-input
+  [placeholderSearch]="'Buscar por capital'"
   (search)="onSearch($event)"
 />
 
@@ -7,4 +20,4 @@
   <span>{{isError()}}</span>
 } @else {
   <country-list [countries]="countries()" />
-}
+} -->
